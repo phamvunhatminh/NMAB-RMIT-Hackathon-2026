@@ -1,0 +1,55 @@
+/* Tide network checks: a quiet feed where refusals are the only thing that shouts. */
+.log { display: flex; flex-direction: column; min-height: 0; font-size: .76rem; line-height: 1.45; }
+
+.head { display: flex; align-items: baseline; gap: .45rem; flex-wrap: wrap; padding: .6rem 1.1rem .45rem; }
+.head h4 { margin: 0; font-size: .78rem; font-weight: 600; letter-spacing: .02em; }
+.sub { font-size: .7rem; }
+
+.pulse { width: 7px; height: 7px; border-radius: 50%; background: #2fb37f; align-self: center; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+
+.rows { list-style: none; margin: 0; padding: 0 .6rem .6rem; overflow: auto; display: flex; flex-direction: column; gap: 1px; }
+.row {
+  display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: .5rem; align-items: baseline;
+  padding: .28rem .5rem; border-radius: 6px; border-left: 2px solid transparent;
+  animation: arrive .5s ease-out;
+}
+@keyframes arrive { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+
+.time { font-family: var(--mono); font-size: .68rem; font-variant-numeric: tabular-nums; }
+.mark { font-family: var(--mono); font-size: .64rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; padding: 0 .3rem; border-radius: 4px; }
+.detail { overflow-wrap: anywhere; }
+.why { opacity: .7; }
+.empty { padding: .3rem .5rem; opacity: .7; }
+
+/* Dark: the bottom of the "What the AI provider receives" panel in chat. */
+.dark { border-top: 1px solid #263240; background: #121a23; color: #c3cdd8; max-height: 34vh; }
+.dark .head h4 { color: #e6ecf2; }
+.dark .sub, .dark .time { color: #6f8094; }
+.dark .ok { color: #5fd3a2; background: rgba(47, 179, 127, .12); }
+.dark .no { color: #ffb4a6; background: rgba(229, 83, 61, .28); }
+.dark .refused { background: rgba(229, 83, 61, .12); border-left-color: #e5533d; color: #ffd9d1; }
+
+/* Light: a card on the admin page. */
+.light { color: var(--ink); max-height: 360px; }
+.light .head { padding: 0 0 .5rem; }
+.light .head h4 { font-size: 1rem; }
+.light .sub, .light .time { color: var(--muted); }
+.light .rows { padding: 0; border: 1px solid var(--line); border-radius: 10px; padding: .3rem; }
+.light .ok { color: var(--sealed); background: var(--sealed-soft); }
+.light .no { color: #fff; background: var(--exposed); }
+.light .refused { background: var(--exposed-soft); border-left-color: var(--exposed); }
+
+/* "Sealed 7 values in 3 data types with TideCloak": bright when it happens, then settles into a status line. */
+.sealed { font-size: .8rem; color: var(--sealed); display: inline-flex; align-items: center; gap: .35rem; animation: settle 6s ease-out forwards; }
+.sealed::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+@keyframes settle {
+  0% { opacity: 0; transform: translateY(2px); }
+  8% { opacity: 1; transform: none; }
+  70% { opacity: 1; color: var(--sealed); }
+  100% { opacity: .75; color: var(--muted); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse, .row, .sealed { animation: none; }
+}

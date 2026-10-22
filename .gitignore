@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.env
+.env.*
+!.env.example
+.data/
+.tidecloak-data/
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+init/.realm_name
+docs/video-script.md
